@@ -1,3 +1,7 @@
+-- ORIGINAL CREDITS TO:
+--  Chebyshev - http://www.tukui.org/v2/forums/topic.php?id=4964#post-44759
+--
+
 if not TukuiDB then return end
 
 local addon = LibStub("AceAddon-3.0"):GetAddon("AdiBags")
