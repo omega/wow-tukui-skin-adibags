@@ -36,13 +36,13 @@ function reSkin(f)
 
     f:SetBackdrop(addon.BACKDROP)
 
-    f:SetBackdropColor(1,0,0,1)
+    f:SetBackdropColor(0,0,0,1)
     f:SetNormalTexture("")
     f.skinned = true
     -- f:SetBackdropBorderColor(0,0,0,0)
-    print(f, f:GetWidth() .. "x" ..f:GetHeight(), f:GetParent():GetName())
-    print(f:GetPoint("TOPLEFT"));
-    print(f:GetRect());
+    -- print(f, f:GetWidth() .. "x" ..f:GetHeight(), f:GetParent():GetName())
+    -- print(f:GetPoint("TOPLEFT"));
+    -- print(f:GetRect());
 end
 
 function bProto:Update()
@@ -64,7 +64,7 @@ function bProto:Update()
     else
         icon:SetTexture(0.3, 0.3, 0.3, 1);
     end
-    icon:Hide()
+    -- icon:Hide()
     local tag = (not self.itemId or addon.db.profile.showBagType) and addon:GetFamilyTag(self.bagFamily)
     if tag then
         self.Stock:SetText(tag)
