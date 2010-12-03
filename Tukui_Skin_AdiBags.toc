@@ -1,0 +1,9 @@
+## Interface: 40000
+## Title: |cffC495DDTukui Skin|r AdiBags
+## Author: Habarg - All over the place
+## Version: 0.1
+## eMail: andremar@me.com
+## RequiredDeps: Tukui, AdiBags
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: delayed
+skin_adibags.lua
