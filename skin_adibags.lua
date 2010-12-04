@@ -97,7 +97,7 @@ function bProto:UpdateBorder (isolatedEvent)
             end
         end
 
-        -- self:SetBackdropBorderColor(r,g,b,a)
+        self:SetBackdropBorderColor(r,g,b,a)
 
         if isolatedEvent then
             addon:SendMessage('AdiBags_UpdateBorder', self)
