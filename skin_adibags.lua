@@ -6,14 +6,13 @@ if not TukuiDB then return end
 
 local addon = LibStub("AceAddon-3.0"):GetAddon("AdiBags")
 local mult = TukuiDB.mult
-mult = -3
 addon.BACKDROP = {
 
     bgFile = TukuiCF.media.blank,
     edgeFile = TukuiCF.media.blank,
     tile = false,
     tileSize = 0,
-    edgeSize = 1,
+    edgeSize = mult,
     insets = {
         left = -mult,
         right = -mult,
@@ -21,8 +20,10 @@ addon.BACKDROP = {
         bottom = -mult,
     },
 }
+local ITEM_SIZE = 31
 addon.db.profile.backgroundColors.Backpack = TukuiCF.media.backdropcolor
 addon.db.profile.backgroundColors.Bank = TukuiCF.media.backdropcolor
+addon.db.profile.scale = 1
 
 local childrenNames = { "Cooldown", "IconTexture", "IconQuestTexture", "Count", "Stock", "NormalTexture" }
 
@@ -31,8 +32,8 @@ local bProto = addon:GetClass('ItemButton').prototype
 local stackProto = addon:GetClass('StackButton').prototype
 
 function reSkin(f)
-    -- f:SetHeight(TukuiDB.Scale(31))
-    -- f:SetWidth(TukuiDB.Scale(31))
+    f:SetHeight(TukuiDB.Scale(ITEM_SIZE))
+    f:SetWidth(TukuiDB.Scale(ITEM_SIZE))
 
     f:SetBackdrop(addon.BACKDROP)
 
@@ -41,6 +42,9 @@ function reSkin(f)
     f.skinned = true
     -- f:SetBackdropBorderColor(0,0,0,0)
     -- print(f, f:GetWidth() .. "x" ..f:GetHeight(), f:GetParent():GetName())
+    if f.section then
+        f.section.Header:SetFont(TukuiCF["media"].font, 12)
+    end
     -- print(f:GetPoint("TOPLEFT"));
     -- print(f:GetRect());
 end
@@ -55,8 +59,8 @@ function bProto:Update()
     icon:SetTexCoord(.08, .92, .08, .92)
     -- icon:SetPoint("TOPLEFT", self, TukuiDB.Scale(2), TukuiDB.Scale(-2))
     -- icon:SetPoint("BOTTOMRIGHT", self, TukuiDB.Scale(-2), TukuiDB.Scale(2))
-    icon:SetWidth(addon.ITEM_SIZE - TukuiDB.mult * 2)
-    icon:SetHeight(addon.ITEM_SIZE - TukuiDB.mult * 2)
+    icon:SetWidth(ITEM_SIZE - TukuiDB.mult * 2)
+    icon:SetHeight(ITEM_SIZE - TukuiDB.mult * 2)
 
     icon:SetPoint("CENTER", self, "CENTER", 0, 0)
     if self.texture then
@@ -85,9 +89,9 @@ function bProto:UpdateBorder (isolatedEvent)
         local r, g, b, a = 1, 1, 1, 1
         local isQuestItem, questId, isActive = GetContainerItemQuestInfo(self.bag, self.slot)
         if addon.db.profile.questIndicator and (questId and not isActive) then
-            r,g,b = 1.0, 0, 0
+            r,g,b = 1.0, 0.3, 0.3
         elseif addon.db.profile.questIndicator and (questId or isQuestItem) then
-            r,g,b = 1.0, 0, 0
+            r,g,b = 1.0, 0.3, 0.3
         elseif addon.db.profile.qualityHighlight then
             local _, _, quality = GetItemInfo(self.itemId)
             if quality and quality >= ITEM_QUALITY_UNCOMMON then
