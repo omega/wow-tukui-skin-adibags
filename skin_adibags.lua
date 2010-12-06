@@ -31,6 +31,18 @@ local childrenNames = { "Cooldown", "IconTexture", "IconQuestTexture", "Count", 
 local bProto = addon:GetClass('ItemButton').prototype
 local stackProto = addon:GetClass('StackButton').prototype
 
+function stackProto:OnCreate()
+    self:SetWidth(ITEM_SIZE)
+    self:SetHeight(ITEM_SIZE)
+    self.slots = {}
+    self:SetScript('OnShow', self.OnShow)
+    self:SetScript('OnHide', self.OnHide)
+    self.GetCountHook = function()
+        return self.count
+    end
+end
+
+
 function reSkin(f)
     f:SetHeight(TukuiDB.Scale(ITEM_SIZE))
     f:SetWidth(TukuiDB.Scale(ITEM_SIZE))
